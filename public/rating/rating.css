@@ -1,0 +1,35 @@
+.rating-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 45px;
+    color: #ccc;
+    transition: 0.25s;
+    transform-origin: center;
+}
+
+.star:hover {
+    color: #ffb400;
+    transform: scale(1.15);
+}
+
+.star.active {
+    color: #ff9500;
+    transform: scale(1.2);
+}
+
+.rating-text {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #444;
+    font-weight: 500;
+}
