@@ -1,4 +1,4 @@
-/* Global */
+/* ---------------- GLOBAL ---------------- */
 body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
     display: flex;
@@ -30,13 +30,6 @@ body {
 
 .nav-link:hover {
     color: #fe424d !important;
-}
-
-/* Responsive navbar spacing */
-@media (max-width: 768px) {
-    .navbar {
-        padding: 0 1rem !important;
-    }
 }
 
 /* ---------------- FOOTER ---------------- */
@@ -91,7 +84,9 @@ body {
     box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
     text-decoration: none;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .listing-card:hover {
@@ -104,9 +99,6 @@ body {
     color: inherit !important;
 }
 
-
-
-
 /* Image */
 .card-img-top {
     width: 100% !important;
@@ -117,7 +109,8 @@ body {
 
 /* Text */
 .card-body {
-    padding: 0.6rem 0.4rem !important;
+    padding: 0.6rem 0.8rem !important;
+    flex: 1;
 }
 
 .card-text {
@@ -125,6 +118,11 @@ body {
     line-height: 1.4;
     margin-top: 4px;
     color: #444;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Subtle hover effect overlay */
@@ -164,25 +162,23 @@ body {
     gap: 1rem;
 }
 
-
-
-/* Horizontal scroll container */
+/* ---------------- CATEGORY SCROLL ---------------- */
 .category-scroll {
     display: flex;
     gap: 2rem;
     padding: 0.8rem 1rem;
     overflow-x: auto;
     white-space: nowrap;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
     align-items: center;
     border-bottom: 1px solid #e5e5e5;
+    scroll-behavior: smooth;
 }
 
 .category-scroll::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
 }
 
-/* Each category icon + text */
 .category-item {
     display: inline-flex;
     flex-direction: column;
@@ -204,14 +200,14 @@ body {
     text-align: center;
 }
 
-/* Active Category Highlight (optional) */
 .category-item.active {
     color: #fe424d;
 }
-/* ---------------- NAVBAR MOBILE FIX ---------------- */
+
+/* ---------------- MOBILE / RESPONSIVE ---------------- */
 @media (max-width: 768px) {
 
-    /* Navbar should stack properly */
+    /* Navbar stacking */
     .navbar {
         height: auto;
         padding: 0.8rem 1rem !important;
@@ -221,12 +217,10 @@ body {
         gap: 0.6rem;
     }
 
-    /* Left logo */
     .navbar-brand {
         font-size: 1.4rem;
     }
 
-    /* Navbar links go full width */
     .nav-item,
     .nav-link {
         width: 100%;
@@ -234,7 +228,6 @@ body {
         padding: 0.4rem 0;
     }
 
-    /* Fix logout / profile breaking issue */
     .navbar-collapse {
         width: 100%;
     }
@@ -258,5 +251,26 @@ body {
     .category-scroll {
         padding: 0.6rem 0.4rem;
         gap: 1.2rem;
+    }
+
+    /* Listing grid single card per row */
+    .listing-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem 0.5rem;
+    }
+
+    /* Card adjustments */
+    .listing-card {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .card-img-top {
+        height: 200px;
+    }
+
+    .show-img {
+        height: 25vh;
     }
 }
