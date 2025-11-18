@@ -81,6 +81,8 @@
       <% }) %>
     </div>
   <% } %>
+  
+<script src="/js/rating.js"></script>
 
   <!-- Map -->
   <h4 class="mt-4 mb-3 text-center">Where you'll be</h4>
@@ -88,16 +90,44 @@
 
 </div>
 
-<script src="/js/rating.js"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Leaflet -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-  const map = L.map('map').setView([19.0760, 72.8777], 13);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
-  L.marker([19.0760, 72.8777]).addTo(map)
-    .bindPopup('<%= listing.title %>')
-    .openPopup();
+  const locationString = "<%= listing.location %>, <%= listing.country %>";
+
+  // Fetch coordinates from Nominatim
+  fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(locationString)}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.length) {
+        console.error("Location not found!");
+        return;
+      }
+
+      const lat = parseFloat(data[0].lat);
+      const lon = parseFloat(data[0].lon);
+
+      // Initialize Leaflet map
+      const map = L.map('map').setView([lat, lon], 13);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 18,
+      }).addTo(map);
+
+      // Add marker
+      const icon = L.icon({
+        iconUrl: '/location.png', // optional custom marker
+        iconSize: [35, 45],
+        iconAnchor: [17, 45]
+      });
+
+      L.marker([lat, lon], {icon})
+        .addTo(map)
+        .bindPopup("Exact location will be provided after booking")
+        .openPopup();
+    })
+    .catch(err => console.error("Geocoding error:", err));
 </script>
