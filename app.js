@@ -103,7 +103,7 @@ app.use((req,res,next)=>{
   next();
 });
 
-app.get("/",(req,res)=>{
+ app.get("/",(req,res)=>{
    res.send("Hi am root");
 });
 
@@ -147,7 +147,7 @@ app.all("*",(req,res,next)=>{
 
 app.use((err,req,res,next)=>{
   let{statusCode=500,message="something went Wrong !"}=err;
-  res.status (statusCode).render("error.ejs",{message});
+  res.status (statusCode).render("error.ejs",{message, currentUser: req.user || null, success: null, error: null});
  // res.status(statusCode).send(message);
 
 });
