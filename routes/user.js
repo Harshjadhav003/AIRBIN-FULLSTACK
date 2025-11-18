@@ -7,12 +7,11 @@ const { saveRedirectUrl } = require("../middleware.js");
 
 const userController = require("../controllers/user.js");
 
-// Signup routes: display signup form and handle user registration
+
 router.route("/signup")
     .get(userController.renderSignupForm)
     .post(wrapAsync(userController.signup));
 
-// Login routes: display login form and handle user authentication
 router.route("/login")
     .get(userController.renderloginForm)
     .post(saveRedirectUrl,
@@ -21,7 +20,6 @@ router.route("/login")
         userController.login
     );
 
-// Logout route: handle user logout
 router.get("/logout",
     userController.logout
 );
