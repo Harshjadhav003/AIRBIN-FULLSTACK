@@ -104,9 +104,7 @@ app.use((req,res,next)=>{
   next();
 });
 
- app.get("/",(req,res)=>{
-   res.send("Hi am root");
-});
+
 
 app.get("/demouser", async (req, res, next) => {
   try {

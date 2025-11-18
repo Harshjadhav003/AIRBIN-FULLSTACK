@@ -1,5 +1,5 @@
 const Listing = require("../models/listing");
-const User = require("../models/user"); // <-- Add this
+const User = require("../models/user");
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAP_TOKEN;
 
@@ -8,134 +8,97 @@ if (mapToken) {
   geocodingClient = mbxGeocoding({ accessToken: mapToken });
 }
 
-// INDEX route
+// ===== INDEX =====
 module.exports.index = async (req, res) => {
-  let { category } = req.query;
-  const page = parseInt(req.query.page) || 1;
-  const limit = 20; // Number of listings per page
+    const { page = 1, category } = req.query;
+    const options = { page: parseInt(page), limit: 9, sort: { _id: -1 } };
+    let query = {};
+    if (category) query.category = category.toLowerCase();
 
-  const query = category ? { category } : {};
+    const result = await Listing.paginate(query, options);
 
-  const options = {
-    page,
-    limit,
-    sort: { _id: -1 } // Sort by latest
-  };
-
-  const result = await Listing.paginate(query, options);
-
-  res.render("listings/index", {
-    allListings: result.docs,
-    category,
-    currentPage: result.page,
-    totalPages: result.totalPages
-  });
+    res.render("listings/index", {
+        allListings: result.docs,
+        currentPage: result.page,
+        totalPages: result.totalPages,
+        category: category || "",
+        success: req.flash("success") || ""
+    });
 };
 
-// SHOW route
+// ===== SHOW =====
 module.exports.showListing = async (req, res) => {
-  let { id } = req.params;
-  const listing = await Listing.findById(id)
-    .populate({
-      path: "reviews",
-      populate: { path: "author" },
-    })
-    .populate("owner"); // owner must refer to User model
-  if (!listing) {
-    req.flash("error", "Listing you requested does not exist!");
-    return res.redirect("/listings");
-  }
-  console.log("Listing object:", listing);
-  console.log("Listing geometry:", listing.geometry);
-  res.render("listings/show.ejs", { listing, mapToken: process.env.MAP_TOKEN });
+    const { id } = req.params;
+    const listing = await Listing.findById(id)
+        .populate({ path: "reviews", populate: { path: "author" } })
+        .populate("owner");
+
+    if (!listing) {
+        req.flash("error", "Listing not found!");
+        return res.redirect("/listings");
+    }
+
+    res.render("listings/show", { listing, mapToken });
 };
 
-// NEW form route
+// ===== NEW FORM =====
 module.exports.renderNewForm = (req, res) => {
-  res.render("listings/new.ejs");
+    res.render("listings/new");
 };
 
-// CREATE listing route
-module.exports.createListing = async (req, res, next) => {
-  const newListing = new Listing(req.body.listing);
-  newListing.owner = req.user._id;
+// ===== CREATE =====
+module.exports.createListing = async (req, res) => {
+    const newListing = new Listing(req.body.listing);
+    newListing.owner = req.user._id;
 
-  if (req.file) {
-    newListing.image = { url: req.file.path, filename: req.file.filename };
-  }
-
-  if (geocodingClient) {
-    let response = await geocodingClient
-      .forwardGeocode({
-        query: req.body.listing.location,
-        limit: 1,
-      })
-      .send();
-    if (
-      response &&
-      response.body &&
-      response.body.features &&
-      response.body.features.length > 0
-    ) {
-      newListing.geometry = response.body.features[0].geometry;
+    if (req.file) {
+        newListing.image = { url: req.file.path, filename: req.file.filename };
     }
-  }
 
-  const savedListing = await newListing.save();
-  console.log(savedListing);
-  req.flash("success", "New Listing Created!");
-  res.redirect("/listings");
+    if (geocodingClient && req.body.listing.location) {
+        const response = await geocodingClient.forwardGeocode({ query: req.body.listing.location, limit: 1 }).send();
+        if (response.body.features.length > 0) {
+            newListing.geometry = response.body.features[0].geometry;
+        }
+    }
+
+    await newListing.save();
+    req.flash("success", "Listing Created!");
+    res.redirect("/listings");
 };
 
-// EDIT form route
+// ===== EDIT FORM =====
 module.exports.renderEditForm = async (req, res) => {
-  let { id } = req.params;
-  const listing = await Listing.findById(id);
-  if (!listing) {
-    req.flash("error", "Listing you requested does not exist!");
-    return res.redirect("/listings");
-  }
-  let originalImageUrl = listing.image ? listing.image.url : null;
-  if (originalImageUrl) {
-    originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250,c_fill");
-  }
-  res.render("listings/edit.ejs", { listing, originalImageUrl });
-};
-
-// UPDATE listing route
-module.exports.updateListing = async (req, res) => {
-  let { id } = req.params;
-  let updateData = req.body.listing;
-
-  if (req.file) {
-    updateData.image = { url: req.file.path, filename: req.file.filename };
-  }
-
-  if (updateData.location && geocodingClient) {
-    const response = await geocodingClient
-      .forwardGeocode({
-        query: updateData.location,
-        limit: 1,
-      })
-      .send();
-    if (response && response.body.features[0]) {
-      updateData.geometry = response.body.features[0].geometry;
-    } else {
-      req.flash("error", "Location not found!");
-      return res.redirect(`/listings/${id}/edit`);
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+    if (!listing) {
+        req.flash("error", "Listing not found!");
+        return res.redirect("/listings");
     }
-  }
-
-  await Listing.findByIdAndUpdate(id, updateData);
-  req.flash("success", "Listing Updated!");
-  res.redirect(`/listings/${id}`);
+    res.render("listings/edit", { listing });
 };
 
-// DELETE listing route
+// ===== UPDATE =====
+module.exports.updateListing = async (req, res) => {
+    const { id } = req.params;
+    const updateData = req.body.listing;
+
+    if (req.file) updateData.image = { url: req.file.path, filename: req.file.filename };
+
+    if (geocodingClient && updateData.location) {
+        const response = await geocodingClient.forwardGeocode({ query: updateData.location, limit: 1 }).send();
+        if (response.body.features.length > 0) updateData.geometry = response.body.features[0].geometry;
+    }
+
+    await Listing.findByIdAndUpdate(id, updateData);
+    req.flash("success", "Listing Updated!");
+    res.redirect(`/listings/${id}`);
+};
+
+// ===== DELETE =====
 module.exports.destroyListing = async (req, res) => {
-  let { id } = req.params;
-  let deletedListing = await Listing.findByIdAndDelete(id);
-  console.log(deletedListing);
-  req.flash("success", "Listing Deleted!");
-  res.redirect("/listings");
+    const { id } = req.params;
+    await Listing.findByIdAndDelete(id);
+    req.flash("success", "Listing Deleted!");
+    res.redirect("/listings");
 };

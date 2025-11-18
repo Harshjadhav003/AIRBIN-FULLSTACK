@@ -1,129 +1,262 @@
+/* Global */
 body {
-    
-    font-family: "Plus Jakarta Sans",sans-serif !important;
+    font-family: "Plus Jakarta Sans", sans-serif !important;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: #fafafa;
 }
 
-.container{
+.container {
     flex: 1;
 }
 
-.navbar{
+/* ---------------- NAVBAR ---------------- */
+.navbar {
     height: 5rem;
     background-color: white;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-.fa-compass{
+.fa-compass {
     color: #fe424d;
     font-size: 2rem;
 }
 
-.nav-link{
-    color:#222222 !important;
-}
-/* footer*/
-.f-info-links a:hover{
-    text-decoration: underline;
-    color:#222222 ;
+.nav-link {
+    color: #222222 !important;
+    font-weight: 500;
 }
 
-.f-info-links ,
- .f-info-socials,
- .f-info-brand {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.nav-link:hover {
+    color: #fe424d !important;
 }
 
-
-.f-info-socials i{
-   margin-right: 1rem; 
-     font-size: 1.2rem;
-      
+/* Responsive navbar spacing */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 1rem !important;
+    }
 }
 
-.f-info{
+/* ---------------- FOOTER ---------------- */
+.f-info {
     text-align: center;
-    height: 8rem;
+    height: auto;
+    padding: 1.5rem;
     background-color: #ebebeb;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: space-evenly;
-}
- /* Cards */
-.listing-card{
- border: none !important;
- margin-bottom: 2rem;
-
+    gap: 1.2rem;
 }
 
-.card-img-top{
-    border-radius: 1rem !important;
-     width: 100% !important;
-     object-fit: cover !important;
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
-.card-body{
-    padding: 0 !important;
+.f-info-socials i {
+    font-size: 1.3rem;
+    transition: 0.3s ease;
 }
 
-.card-text p{
- font-weight: 400 !important;
+.f-info-socials i:hover {
+    color: #fe424d;
+    transform: translateY(-3px);
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+    color: #222222;
+}
+
+/* ---------------- LISTING GRID ---------------- */
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+    padding: 1.5rem 1rem 1rem 1rem;
+}
+
+/* ---------------- CARD ---------------- */
+.listing-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+}
+
+.listing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.12);
+}
+
+.listing-link {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+
+
+
+/* Image */
+.card-img-top {
+    width: 100% !important;
+    height: 220px;
+    object-fit: cover !important;
+    border-radius: 18px;
+}
+
+/* Text */
+.card-body {
+    padding: 0.6rem 0.4rem !important;
 }
 
 .card-text {
-  text-align: justify;
-  font-size: 1.05rem;
-  line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-top: 4px;
+    color: #444;
 }
 
-
-.listing-card {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-weight: 400;
-}
-
-.listing-link{
-    text-decoration: none;
-}
-
-
-
-
-/*card effect */
-
-.card-img-overlay:hover{
-    opacity: 0.2;
+/* Subtle hover effect overlay */
+.card-img-overlay:hover {
+    opacity: 0.15;
     background-color: white;
 }
 
-.add-btn{
+/* Buttons */
+.add-btn,
+.edit-btn {
     background-color: #fe424d !important;
     border: none !important;
+    color: white !important;
 }
 
-/*Edit page */
-
-.edit-btn{
-     background-color: #fe424d !important;
-    border: none !important; 
+.add-btn:hover,
+.edit-btn:hover {
+    opacity: 0.9;
 }
 
-/*Show  page */
-.show-img{
-    height: 30vh;
-
+/* ---------------- SHOW PAGE ---------------- */
+.show-img {
+    width: 100%;
+    height: 35vh;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-.btns{
-    display: flex;
-}
-
-.show-card{
+.show-card {
     padding-left: 0;
     padding-right: 0;
+}
+
+.btns {
+    display: flex;
+    gap: 1rem;
+}
+
+
+
+/* Horizontal scroll container */
+.category-scroll {
+    display: flex;
+    gap: 2rem;
+    padding: 0.8rem 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none; /* Firefox */
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+/* Each category icon + text */
+.category-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    color: #444;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.category-item i {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+
+.category-item span {
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* Active Category Highlight (optional) */
+.category-item.active {
+    color: #fe424d;
+}
+/* ---------------- NAVBAR MOBILE FIX ---------------- */
+@media (max-width: 768px) {
+
+    /* Navbar should stack properly */
+    .navbar {
+        height: auto;
+        padding: 0.8rem 1rem !important;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+
+    /* Left logo */
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+
+    /* Navbar links go full width */
+    .nav-item,
+    .nav-link {
+        width: 100%;
+        text-align: left;
+        padding: 0.4rem 0;
+    }
+
+    /* Fix logout / profile breaking issue */
+    .navbar-collapse {
+        width: 100%;
+    }
+
+    /* Search bar full width */
+    .search-container {
+        width: 100%;
+        margin-top: 0.6rem;
+    }
+
+    .search-container input {
+        width: 100%;
+        margin-bottom: 0.4rem;
+    }
+
+    .search-container button {
+        width: 100%;
+    }
+
+    /* Category bar spacing */
+    .category-scroll {
+        padding: 0.6rem 0.4rem;
+        gap: 1.2rem;
+    }
 }
