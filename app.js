@@ -14,6 +14,7 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const session = require("express-session");
+const Mongostore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport =  require("passport");
 const LocalStrategy = require("passport-local");
@@ -30,16 +31,18 @@ const multer = require("multer");
 
 
 
-const MONGO_URL ="mongodb://127.0.0.1:27017/test";
 
-main().then(()=>{
-    console.log("connected to DB");
-}).catch((err)=>{
-    console.log(err);
-});
+
+
+
+const dbUrl =process.env.ATLAS_URL ;
+
+main()
+  .then(() => console.log("connected to DB"))
+  .catch((err) => console.log("DB ERROR:", err));
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 app.set("view engine","ejs");
@@ -50,8 +53,23 @@ app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 
 
+
+const store  = Mongostore.create({
+  mongoUrl:dbUrl,
+  crypto:{
+    secret : process.env.SECRET,
+  },
+    touchAfter : 24*3600,
+});
+
+
+store.on("error",()=>{
+  console.log("ERROR In MONGO-SESSION STORE",err);
+});
+
 const sessionOptions = {
-  secret :"mysupersecretcode",
+  store ,
+  secret :process.env.SECRET,
   resave : false ,
   saveUninitialized :true,
   cookie : {

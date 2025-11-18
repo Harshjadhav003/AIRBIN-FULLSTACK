@@ -122,7 +122,7 @@
                 <div class="card col listing-card">
 
                     <img 
-                      src="<%= listing.image?.url || '/images/default.jpg' %>" 
+                      src="<%= listing.image ? listing.image.url : '/images/default.jpg' %>" 
                       class="card-img-top"
                       alt="listing_image"
                       style="height: 20rem;"
@@ -139,6 +139,15 @@
 
                 </div>
             </a>
+        <% } %>
+    </div>
+
+    <div class="pagination">
+        <% if (currentPage > 1) { %>
+            <a href="/listings?page=<%= currentPage - 1 %>&category=<%= category || '' %>">Previous</a>
+        <% } %>
+        <% if (currentPage < totalPages) { %>
+            <a href="/listings?page=<%= currentPage + 1 %>&category=<%= category || '' %>">Next</a>
         <% } %>
     </div>
 

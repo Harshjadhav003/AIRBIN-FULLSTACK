@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const listingSchema = new Schema({
     title: { 
@@ -38,10 +39,14 @@ const listingSchema = new Schema({
         'farms',
         'arctic',
         'boats'
-    ]
+    ],
+    index: true
 }
 
 });
+
+listingSchema.plugin(mongoosePaginate);
+
 
 
 listingSchema.post("findOneAndDelete", async function (listing) {

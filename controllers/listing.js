@@ -11,10 +11,25 @@ if (mapToken) {
 // INDEX route
 module.exports.index = async (req, res) => {
   let { category } = req.query;
-  const allListings = category
-    ? await Listing.find({ category })
-    : await Listing.find({});
-  res.render("listings/index", { allListings, category });
+  const page = parseInt(req.query.page) || 1;
+  const limit = 20; // Number of listings per page
+
+  const query = category ? { category } : {};
+
+  const options = {
+    page,
+    limit,
+    sort: { _id: -1 } // Sort by latest
+  };
+
+  const result = await Listing.paginate(query, options);
+
+  res.render("listings/index", {
+    allListings: result.docs,
+    category,
+    currentPage: result.page,
+    totalPages: result.totalPages
+  });
 };
 
 // SHOW route
@@ -80,8 +95,10 @@ module.exports.renderEditForm = async (req, res) => {
     req.flash("error", "Listing you requested does not exist!");
     return res.redirect("/listings");
   }
-  let originalImageUrl = listing.image[0].url;
-  originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250,c_fill");
+  let originalImageUrl = listing.image ? listing.image.url : null;
+  if (originalImageUrl) {
+    originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250,c_fill");
+  }
   res.render("listings/edit.ejs", { listing, originalImageUrl });
 };
 

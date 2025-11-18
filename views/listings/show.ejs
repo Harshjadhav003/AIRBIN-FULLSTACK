@@ -7,7 +7,7 @@
 
   <!-- Image -->
   <div class="image-container mb-3" style="max-width: 600px; width: 100%;">
-      <img src="<%= listing.image?.url %>" 
+      <img src="<%= listing.image ? listing.image.url : '' %>" 
            alt="listing_image" 
            class="img-fluid rounded shadow-sm" 
            style="height: 350px; object-fit: cover;">
