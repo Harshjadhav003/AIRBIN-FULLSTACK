@@ -10,15 +10,35 @@ if (mapToken) {
 
 // ===== INDEX =====
 module.exports.index = async (req, res) => {
-    const { page = 1, category, search } = req.query;
-    const options = { page: parseInt(page), limit: 9, sort: { _id: -1 } };
+    let { page = 1, category, search } = req.query;
+
+    const options = {
+        page: parseInt(page),
+        limit: 9,
+        sort: { _id: -1 }
+    };
+
     let query = {};
-    if (category) query.category = category.toLowerCase();
-    if (search) {
-        const searchRegex = new RegExp(search, "i");
-        query.$or = [{ title: searchRegex }, { category: searchRegex }];
+
+    // CATEGORY FILTER
+    if (category && category !== "all") {
+        query.category = category.toLowerCase();
     }
 
+    // SEARCH FILTER
+    if (search) {
+        const searchRegex = new RegExp(search, "i");
+
+        query.$or = [
+            { title: searchRegex },
+            { description: searchRegex },
+            { location: searchRegex },
+            { country: searchRegex },
+            { category: searchRegex }
+        ];
+    }
+
+    // PAGINATION + FILTERS + SEARCH
     const result = await Listing.paginate(query, options);
 
     res.render("listings/index", {

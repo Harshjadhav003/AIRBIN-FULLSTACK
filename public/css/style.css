@@ -74,6 +74,7 @@ body {
     text-decoration: none;
     color: #444;
     transition: 0.3s ease;
+    font-weight: 500;
 }
 
 .f-info-links a:hover {
