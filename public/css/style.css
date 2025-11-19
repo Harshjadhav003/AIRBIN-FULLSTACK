@@ -129,6 +129,14 @@ body {
     background-color: white;
 }
 
+
+.card-price {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ff5a5f; /* Airbnb-like price color */
+    margin: 0;
+}
+
 /* Buttons */
 .add-btn,
 .edit-btn {
