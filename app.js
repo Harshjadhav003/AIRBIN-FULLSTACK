@@ -130,15 +130,6 @@ app.use("/listings/:id/reviews", reviewsRouter);
 
 
 
-app.get("/privacy", wrapAsync (async (req, res) => {
-     await res.send("This is the privacy page.");
-}));
-
-app.get("/terms",wrapAsync( async (req, res) => {
-    await res.send("This is the terms and conditions page.");
-}));
-
-
 app.all("*",(req,res,next)=>{
   next(new ExpressError(404,"Page Not Found!"));
 });
