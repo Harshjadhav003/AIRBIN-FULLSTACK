@@ -10,10 +10,14 @@ if (mapToken) {
 
 // ===== INDEX =====
 module.exports.index = async (req, res) => {
-    const { page = 1, category } = req.query;
+    const { page = 1, category, search } = req.query;
     const options = { page: parseInt(page), limit: 9, sort: { _id: -1 } };
     let query = {};
     if (category) query.category = category.toLowerCase();
+    if (search) {
+        const searchRegex = new RegExp(search, "i");
+        query.$or = [{ title: searchRegex }, { category: searchRegex }];
+    }
 
     const result = await Listing.paginate(query, options);
 
@@ -22,6 +26,7 @@ module.exports.index = async (req, res) => {
         currentPage: result.page,
         totalPages: result.totalPages,
         category: category || "",
+        search: search || "",
         success: req.flash("success") || ""
     });
 };

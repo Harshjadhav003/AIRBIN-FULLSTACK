@@ -48,4 +48,26 @@ document.addEventListener('DOMContentLoaded', function() {
     marker.bindPopup(`<b>${mapElement.dataset.title}</b>`).openPopup();
   }
 
+  // =======================
+  //   SHOW MORE DESCRIPTION
+  // =======================
+  const descriptionElement = document.getElementById('description');
+  if (descriptionElement) {
+    const fullText = descriptionElement.textContent;
+    const shortText = fullText.substring(0, 100);
+
+    if (fullText.length > 100) {
+      descriptionElement.innerHTML = `${shortText}... <button id="show-more-btn" class="btn btn-link p-0">Show More</button>`;
+
+      const showMoreBtn = document.getElementById('show-more-btn');
+      showMoreBtn.addEventListener('click', () => {
+        descriptionElement.innerHTML = `${fullText} <button id="show-less-btn" class="btn btn-link p-0">Show Less</button>`;
+        
+        const showLessBtn = document.getElementById('show-less-btn');
+        showLessBtn.addEventListener('click', () => {
+            descriptionElement.innerHTML = `${shortText}... <button id="show-more-btn" class="btn btn-link p-0">Show More</button>`;
+        });
+      });
+    }
+  }
 });

@@ -20,6 +20,14 @@ module.exports.saveRedirectUrl = (req, res,next)=>{
   next();
 };
 
+module.exports.isNotLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    req.flash("error", "You are already logged in");
+    return res.redirect("/listings");
+  }
+  next();
+}
+
 
 
 module.exports.isOwner =  async(req,res,next)=>{

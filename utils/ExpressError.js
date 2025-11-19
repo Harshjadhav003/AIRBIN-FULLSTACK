@@ -3,7 +3,7 @@ class ExpressError extends Error {
         super();
         this.statusCode=statusCode;
         this.message=message;
-
+        this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
     }
 }
 

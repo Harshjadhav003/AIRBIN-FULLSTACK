@@ -41,8 +41,11 @@ const listingSchema = new Schema({
         'boats'
     ],
     index: true
-}
-
+},
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 listingSchema.plugin(mongoosePaginate);

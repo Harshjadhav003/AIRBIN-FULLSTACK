@@ -15,7 +15,7 @@
 
   <!-- Info -->
   <div class="info-container p-3 mb-3 rounded shadow-sm text-center" style="max-width: 600px; background-color: #f8f9fa;">
-      <p class="mb-2"><%= listing.description %></p>
+      <p class="mb-2" id="description"><%= listing.description %></p>
       <p class="mb-1 fw-bold">₹<%= listing.price.toLocaleString("en-IN") %></p>
       <p class="mb-1"><%= listing.location %></p>
       <p class="mb-0"><%= listing.country %></p>
