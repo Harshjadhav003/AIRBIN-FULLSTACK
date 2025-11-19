@@ -128,6 +128,13 @@ app.use("/", userRouter);
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 
+app.get("/terms", (req, res) => {
+    res.render("includes/terms");
+});
+
+app.get("/privacy", (req, res) => {
+    res.render("includes/privacy");
+});
 
 
 app.all("*",(req,res,next)=>{
