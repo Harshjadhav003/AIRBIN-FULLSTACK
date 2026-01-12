@@ -31,6 +31,9 @@
     </div>
   <% } %>
 
+
+
+
   <!-- Review Form -->
   <% if(currentUser){ %>
     <hr class="w-100">
@@ -60,7 +63,30 @@
     </div>
   <% } %>
 
-  <hr class="w-100">
+  <!-- Booking form -->
+
+<div class="booking-box">
+  <h5 class="price">₹ <%= listing.price %> <span>/night</span></h5>
+
+  <form action="/booking/<%= listing._id %>" method="POST">
+    <div class="date-box">
+      <div>
+        <label>Check In</label>
+        <input type="date" name="checkIn" required>
+      </div>
+
+      <div>
+        <label>Check Out</label>
+        <input type="date" name="checkOut" required>
+      </div>
+    </div>
+
+    <button class="book-btn">Book Now</button>
+  </form>
+</div>
+
+<br><br>
+
 
   <!-- Reviews -->
   <% if(listing.reviews.length>0) { %>

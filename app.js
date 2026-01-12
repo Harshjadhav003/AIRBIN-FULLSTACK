@@ -3,8 +3,6 @@ require("dotenv").config();
 }
 
 
-
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -23,15 +21,11 @@ const Listing = require("./models/listing.js");
 const Review = require("./models/review.js");
 
 
-
 const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter  = require("./routes/user.js");
 const multer = require("multer");
-
-
-
-
+const bookingRoutes = require("./routes/booking.js");
 
 
 
@@ -51,6 +45,8 @@ app.use(express.urlencoded ({extended:true}));
 app.use(methodOverride("_method"));
 app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
+
+
 
 
 
@@ -124,9 +120,18 @@ app.get("/demouser", async (req, res, next) => {
 });
 
 
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
+
+app.use("/booking", bookingRoutes);
 app.use("/", userRouter);
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
+
+
+
 
 app.get("/terms", (req, res) => {
     res.render("includes/terms");

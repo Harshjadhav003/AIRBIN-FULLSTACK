@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-paginate-v2');
 
+
+
 const listingSchema = new Schema({
     title: { 
         type: String,
@@ -26,22 +28,23 @@ const listingSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
-   category: {
-    type: String,
-    enum: [
-        'trending',
-        'rooms',
-        'iconic-cities',
-        'mountains',
-        'castles',
-        'pools',
-        'camping',
-        'farms',
-        'arctic',
-        'boats'
-    ],
-    index: true
-},
+    category: {
+        type: String,
+        enum: [
+            'trending',
+            'rooms',
+            'iconic-cities',
+            'mountains',
+            'castles',
+            'pools',
+            'camping',
+            'farms',
+            'arctic',
+            'boats'
+        ],
+        index: true
+    },
+     
     createdAt: {
         type: Date,
         default: Date.now,
@@ -49,8 +52,6 @@ const listingSchema = new Schema({
 });
 
 listingSchema.plugin(mongoosePaginate);
-
-
 
 listingSchema.post("findOneAndDelete", async function (listing) {
     if (listing) {

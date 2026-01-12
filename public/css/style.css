@@ -318,3 +318,66 @@ body {
         border-radius: 15px;
         box-shadow: 0 8px 25px rgba(0,0,0,0.12);
     }
+
+.booking-box {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 20px;
+  width: 420px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.booking-box .price {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.booking-box .price span {
+  font-size: 14px;
+  color: #555;
+}
+
+.date-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.date-box div {
+  flex: 1;
+}
+
+.date-box label {
+  font-size: 12px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.date-box input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.book-btn {
+  width: 100%;
+  background: #ff385c;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.book-btn:hover {
+  background: #e31c5f;
+}
+
