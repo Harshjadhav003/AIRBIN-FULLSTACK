@@ -323,11 +323,39 @@ body {
   border: 1px solid #ddd;
   border-radius: 14px;
   padding: 20px;
-  width: 420px;
+  width: 100%;
+  max-width: 420px;   /* laptop size */
   background: #fff;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  margin-top: 20px;
+  margin: 20px auto; /* center on all screens */
 }
+
+/* 📱 Mobile (small devices) */
+@media (max-width: 576px) {
+  .booking-box {
+    max-width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  }
+}
+
+/* 📱 Tablet */
+@media (min-width: 577px) and (max-width: 992px) {
+  .booking-box {
+    max-width: 360px;
+  }
+}
+
+/* 💻 Laptop & Desktop */
+@media (min-width: 993px) {
+  .booking-box {
+    max-width: 420px;
+    position: sticky; /* optional (like Airbnb) */
+    top: 90px;
+  }
+}
+
 
 .booking-box .price {
   font-size: 22px;
