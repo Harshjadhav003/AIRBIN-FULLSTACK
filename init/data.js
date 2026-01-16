@@ -377,7 +377,7 @@ const sampleListings = [
       "Watch the Northern Lights from the comfort of your warm glass igloo under the Arctic sky.",
     image: {
       filename: "listingimage",
-      url: "https://images.unsplash.com/photo-1505692794403-34d0984388bd?auto=format&fit=crop&w=800&q=60",
+      url: "https://images.unsplash.com/photo-1531218150217-54595c2b5346?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     price: 3800,
     location: "Lapland",

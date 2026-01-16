@@ -4,7 +4,7 @@
         <div class="col-8 offset-2" >
             <br><br>
     <h3>Create a new listing</h3>
-     <form method="post" action="/listings" novalidate class="needs-validation">
+     <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
         <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input name="listing[title]"
@@ -22,23 +22,11 @@
              <div class="invalid-feedback">Please enter a short Description</div>
         </div>
        
-        <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
-            <div id="image-inputs">
-                <input name="listing[image][0][url]" placeholder="enter image URL/link" type="text" class="form-control">
-            </div>
-            <button type="button" id="add-image" class="btn btn-secondary mt-2">Add another image</button>
-        </div>
-        
-        <script>
-            document.getElementById('add-image').addEventListener('click', function() {
-                const imageInputs = document.getElementById('image-inputs');
-                const newIndex = imageInputs.children.length;
-                const newInput = document.createElement('div');
-                newInput.innerHTML = `<input name="listing[image][${newIndex}][url]" placeholder="enter image URL/link" type="text" class="form-control mt-2">`;
-                imageInputs.appendChild(newInput);
-            });
-        </script>
+      
+         <div class="mb-3">
+            <label for="image" class="form-label">Upload listing image</label>
+            <input name="listing[image]"  type="file" class="form-control" required>
+         </div>
         
       
         <div class="row">

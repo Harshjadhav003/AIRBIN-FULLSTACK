@@ -1,129 +1,411 @@
+/* ---------------- GLOBAL ---------------- */
 body {
-    
-    font-family: "Plus Jakarta Sans",sans-serif !important;
+    font-family: "Plus Jakarta Sans", sans-serif !important;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: #ffffff !important;
 }
 
-.container{
+.container {
     flex: 1;
 }
 
-.navbar{
+/* ---------------- NAVBAR ---------------- */
+.navbar {
     height: 5rem;
     background-color: white;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-.fa-compass{
+.fa-compass {
     color: #fe424d;
     font-size: 2rem;
 }
 
-.nav-link{
-    color:#222222 !important;
-}
-/* footer*/
-.f-info-links a:hover{
-    text-decoration: underline;
-    color:#222222 ;
+.nav-link {
+    color: #222222 !important;
+    font-weight: 500;
 }
 
-.f-info-links ,
- .f-info-socials,
- .f-info-brand {
+.nav-link:hover {
+    color: #fe424d !important;
+}
+/* ---------------- FOOTER ---------------- */
+.f-info {
     width: 100%;
+    padding: 1.6rem 1rem;
+    background: #f7f7f7 !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    border-top: 1px solid #e5e5e5;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+/* Sections */
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
+}
+
+/* Icons */
+.f-info-socials i {
+    font-size: 1.4rem;
+    transition: 0.3s ease;
+    color: #555;
+}
+
+.f-info-socials i:hover {
+    color: #fe424d;
+    transform: translateY(-3px);
+}
+
+/* Links */
+.f-info-links a {
+    text-decoration: none;
+    color: #444;
+    transition: 0.3s ease;
+    font-weight: 500;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+    color: #222222;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .f-info {
+        font-size: 0.85rem;
+        gap: 0.7rem;
+    }
 }
 
 
-.f-info-socials i{
-   margin-right: 1rem; 
-     font-size: 1.2rem;
-      
+/* ---------------- LISTING GRID ---------------- */
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem;
+    padding: 1.5rem 1rem 1rem 1rem;
+    background: #ffffff !important;
 }
 
-.f-info{
-    text-align: center;
-    height: 8rem;
-    background-color: #ebebeb;
+/* ---------------- CARD ---------------- */
+.listing-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    text-decoration: none;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: space-evenly;
-}
- /* Cards */
-.listing-card{
- border: none !important;
- margin-bottom: 2rem;
-
+    flex-direction: column;
+    height: 100%;
 }
 
-.card-img-top{
-    border-radius: 1rem !important;
-     width: 100% !important;
-     object-fit: cover !important;
+.listing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.12);
 }
 
-.card-body{
-    padding: 0 !important;
+.listing-link {
+    text-decoration: none !important;
+    color: inherit !important;
 }
 
-.card-text p{
- font-weight: 400 !important;
+/* Image */
+.card-img-top {
+    width: 100% !important;
+    height: 220px;
+    object-fit: cover !important;
+    border-radius: 18px;
+}
+
+/* Text */
+.card-body {
+    padding: 0.6rem 0.8rem !important;
+    flex: 1;
 }
 
 .card-text {
-  text-align: justify;
-  font-size: 1.05rem;
-  line-height: 1.6;
+    font-size: 1rem;
+   
+    margin-top: 4px;
+    color: #444;
+    display: -webkit-box;
+    overflow: hidden;
+   
 }
 
-
-.listing-card {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-weight: 400;
-}
-
-.listing-link{
-    text-decoration: none;
-}
-
-
-
-
-/*card effect */
-
-.card-img-overlay:hover{
-    opacity: 0.2;
+/* Subtle hover effect overlay */
+.card-img-overlay:hover {
+    opacity: 0.15;
     background-color: white;
 }
 
-.add-btn{
+
+.card-price {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ff5a5f; /* Airbnb-like price color */
+    margin: 0;
+}
+
+/* Buttons */
+.add-btn,
+.edit-btn {
     background-color: #fe424d !important;
     border: none !important;
+    color: white !important;
 }
 
-/*Edit page */
-
-.edit-btn{
-     background-color: #fe424d !important;
-    border: none !important; 
+.add-btn:hover,
+.edit-btn:hover {
+    opacity: 0.9;
 }
 
-/*Show  page */
-.show-img{
-    height: 30vh;
-
+/* ---------------- SHOW PAGE ---------------- */
+.show-img {
+    width: 100%;
+    height: 35vh;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-.btns{
-    display: flex;
-}
-
-.show-card{
+.show-card {
     padding-left: 0;
     padding-right: 0;
 }
+
+.btns {
+    display: flex;
+    gap: 1rem;
+}
+
+/* ---------------- CATEGORY SCROLL ---------------- */
+.category-scroll {
+    display: flex;
+    gap: 2rem;
+    padding: 0.8rem 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+    scroll-behavior: smooth;
+    background: #ffffff !important;
+}
+
+.category-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.category-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    color: #444;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.category-item i {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+
+.category-item span {
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.category-item.active {
+    color: #fe424d;
+}
+
+/* ---------------- MOBILE / RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+
+    /* Navbar stacking */
+    .navbar {
+        height: auto;
+        padding: 0.8rem 1rem !important;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+
+    .nav-item,
+    .nav-link {
+        width: 100%;
+        text-align: left;
+        padding: 0.4rem 0;
+    }
+
+    .navbar-collapse {
+        width: 100%;
+    }
+
+    /* Search bar full width */
+    .search-container {
+        width: 100%;
+        margin-top: 0.6rem;
+    }
+
+    .search-container input {
+        width: 100%;
+        margin-bottom: 0.4rem;
+    }
+
+    .search-container button {
+        width: 100%;
+    }
+
+    /* Category bar spacing */
+    .category-scroll {
+        padding: 0.6rem 0.4rem;
+        gap: 1.2rem;
+    }
+
+    /* Listing grid single card per row */
+    .listing-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem 0.5rem;
+    }
+
+    /* Card adjustments */
+    .listing-card {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .card-img-top {
+        height: 200px;
+    }
+.show-img {
+    width: 100%;
+    height: 400px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+}
+
+}
+
+ .login-card {
+        max-width: 420px;
+        margin: 60px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+.booking-box {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 20px;
+  width: 100%;
+  max-width: 420px;   /* laptop size */
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  margin: 20px auto; /* center on all screens */
+}
+
+/* 📱 Mobile (small devices) */
+@media (max-width: 576px) {
+  .booking-box {
+    max-width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  }
+}
+
+/* 📱 Tablet */
+@media (min-width: 577px) and (max-width: 992px) {
+  .booking-box {
+    max-width: 360px;
+  }
+}
+
+/* 💻 Laptop & Desktop */
+@media (min-width: 993px) {
+  .booking-box {
+    max-width: 420px;
+    position: sticky; /* optional (like Airbnb) */
+    top: 90px;
+  }
+}
+
+
+.booking-box .price {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.booking-box .price span {
+  font-size: 14px;
+  color: #555;
+}
+
+.date-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.date-box div {
+  flex: 1;
+}
+
+.date-box label {
+  font-size: 12px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.date-box input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.book-btn {
+  width: 100%;
+  background: #ff385c;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.book-btn:hover {
+  background: #e31c5f;
+}
+
