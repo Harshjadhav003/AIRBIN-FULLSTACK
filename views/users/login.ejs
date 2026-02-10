@@ -1,8 +1,6 @@
 <% layout("/layouts/boilerplate") %>
 
-
 <div class="login-card">
-
     <h2 class="text-center mb-4">Login</h2>
 
     <form action="/login" method="POST" class="needs-validation" novalidate>
@@ -14,13 +12,13 @@
             <div class="invalid-feedback">Please enter your username</div>
         </div>
 
-        <!-- Password + Show Button -->
+        <!-- Password -->
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
+            <label for="loginPassword" class="form-label">Password</label>
 
             <div class="input-group">
-                <input name="password" id="password" type="password" class="form-control" required>
-                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                <input name="password" id="loginPassword" type="password" class="form-control" required>
+                <button class="btn btn-outline-secondary" type="button" id="toggleLoginPassword">
                     Show
                 </button>
             </div>
@@ -29,23 +27,20 @@
         </div>
 
         <button class="btn btn-dark w-100 mt-3">Login</button>
-
     </form>
 </div>
 
 <script>
+    const toggleLoginPassword = document.getElementById("toggleLoginPassword");
+    const loginPassword = document.getElementById("loginPassword");
 
-    // Show/Hide Password
-    const togglePassword = document.getElementById("togglePassword");
-    const passwordField = document.getElementById("password");
-
-    togglePassword.addEventListener("click", () => {
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-            togglePassword.textContent = "Hide";
+    toggleLoginPassword.addEventListener("click", () => {
+        if (loginPassword.type === "password") {
+            loginPassword.type = "text";
+            toggleLoginPassword.textContent = "Hide";
         } else {
-            passwordField.type = "password";
-            togglePassword.textContent = "Show";
+            loginPassword.type = "password";
+            toggleLoginPassword.textContent = "Show";
         }
     });
 </script>

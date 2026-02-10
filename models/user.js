@@ -6,14 +6,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true
-  },
-  username: {
-    type: String // required internally by passport-local-mongoose
   }
 });
 
-userSchema.plugin(passportLocalMongoose, {
-  usernameField: "email"
-});
+//  usernameField remove
+//  default username will be "username"
+
+userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", userSchema);
