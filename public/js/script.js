@@ -1,5 +1,5 @@
 (() => {
-  'use strict'
+  'use strict';
 
   const forms = document.querySelectorAll('.needs-validation');
 
@@ -14,39 +14,37 @@
   });
 })();
 
-
 // =======================
 //   LEAFLET MAP INITIALIZATION
 // =======================
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
   const mapElement = document.getElementById('map');
-  
-  if (mapElement) {
 
-    // GET COORDINATES SAFELY
-    const coordinates = JSON.parse(mapElement.dataset.coordinates || "[]");
-    
-    if (!coordinates.length) {
-      console.log("❌ No coordinates found!");
-      return;
-    }
+  if (!mapElement) return;
 
-    const lat = coordinates[1];
-    const lng = coordinates[0];
+  // ✅ GET LAT & LNG SAFELY
+  const lat = parseFloat(mapElement.dataset.lat);
+  const lng = parseFloat(mapElement.dataset.lng);
 
-    // INITIALIZE MAP
-    const map = L.map('map').setView([lat, lng], 12);
-
-    // OPENSTREETMAP TILE LAYER (FREE)
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    // MARKER
-    const marker = L.marker([lat, lng]).addTo(map);
-    marker.bindPopup(`<b>${mapElement.dataset.title}</b>`).openPopup();
+  if (isNaN(lat) || isNaN(lng)) {
+    console.error("❌ Coordinates missing or invalid");
+    return;
   }
+
+  // ✅ INITIALIZE MAP
+  const map = L.map('map').setView([lat, lng], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 18
+  }).addTo(map);
+
+  // ✅ MARKER
+  L.marker([lat, lng])
+    .addTo(map)
+    .bindPopup(`<b>${mapElement.dataset.title}</b>`)
+    .openPopup();
 
   // =======================
   //   SHOW MORE DESCRIPTION
@@ -57,15 +55,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const shortText = fullText.substring(0, 100);
 
     if (fullText.length > 100) {
-      descriptionElement.innerHTML = `${shortText}... <button id="show-more-btn" class="btn btn-link p-0">Show More</button>`;
+      descriptionElement.innerHTML =
+        `${shortText}... <button id="show-more-btn" class="btn btn-link p-0">Show More</button>`;
 
-      const showMoreBtn = document.getElementById('show-more-btn');
-      showMoreBtn.addEventListener('click', () => {
-        descriptionElement.innerHTML = `${fullText} <button id="show-less-btn" class="btn btn-link p-0">Show Less</button>`;
-        
-        const showLessBtn = document.getElementById('show-less-btn');
-        showLessBtn.addEventListener('click', () => {
-            descriptionElement.innerHTML = `${shortText}... <button id="show-more-btn" class="btn btn-link p-0">Show More</button>`;
+      document.getElementById('show-more-btn').addEventListener('click', () => {
+        descriptionElement.innerHTML =
+          `${fullText} <button id="show-less-btn" class="btn btn-link p-0">Show Less</button>`;
+
+        document.getElementById('show-less-btn').addEventListener('click', () => {
+          descriptionElement.innerHTML =
+            `${shortText}... <button id="show-more-btn" class="btn btn-link p-0">Show More</button>`;
         });
       });
     }
