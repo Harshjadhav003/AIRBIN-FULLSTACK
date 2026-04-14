@@ -29,7 +29,7 @@ const bookingRoutes = require("./routes/booking.js");
 
 
 
-const dbUrl =process.env.ATLAS_URL ;
+const dbUrl = process.env.ATLAS_URL ;
 
 main()
   .then(() => console.log("connected to DB"))
