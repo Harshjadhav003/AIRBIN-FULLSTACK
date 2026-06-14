@@ -104,7 +104,7 @@ AIRBIN-FULLSTACK
 * 💳 Payment integration (Razorpay/Stripe)
 * 📈 Performance optimization
 * ❤️ Wishlist feature to save favorite properties
-* 📱 Improved UI/UX
+* 📱 Improved UI/UX 
 
 ---
 
