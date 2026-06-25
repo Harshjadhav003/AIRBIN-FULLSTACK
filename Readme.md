@@ -2,7 +2,10 @@
 
 ### Full-Stack Property Rental Platform Inspired by Airbnb
 
-AIRBIN is a scalable full-stack web application that enables users to discover, list, and manage rental properties through a seamless booking experience. Built using modern backend architecture and cloud-based services, the platform demonstrates industry-standard practices for authentication, API design, media management, and database modeling.
+AIRBIN – Full Stack Airbnb Clone | Node.js, Express.js, MongoDB, Cloudinary, Google Maps
+
+Developed a production-ready Airbnb-inspired property rental platform with secure authentication, property management, booking functionality, image uploads, and location visualization. Implemented RESTful APIs using MVC architecture, integrated Cloudinary for media storage, and deployed the application on Render. Built scalable backend services with MongoDB and Mongoose while ensuring responsive user experience and secure session management.
+
 
 <p align="center">
   <img src="./public/screenshot/Airbnb.png" alt="AIRBIN Banner">
