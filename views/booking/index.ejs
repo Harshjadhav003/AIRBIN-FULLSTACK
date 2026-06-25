@@ -1,0 +1,189 @@
+<style>
+/* Full page flex container */
+.full-page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+/* Booking Card Styling */
+.booking-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #fff;
+  width: 100%;
+  max-width: 650px !important;
+  margin-bottom: 15px;
+}
+
+.booking-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Card Image */
+.booking-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Card Body */
+.booking-card .card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* space between info sections */
+}
+
+/* Title */
+.booking-card .card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Badge */
+.booking-card .badge {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Info Box */
+.card-info {
+  background-color: #f1f3f5;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #495057;
+  gap: 15px; /* spacing between check-in and check-out */
+}
+
+/* Info Labels and Values */
+.card-info .info-label {
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: #6c757d;
+  display: block;
+}
+.card-info .info-value {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Price Box */
+.price-box {
+  background-color: #e9f7ef;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-weight: 600;
+  color: #2f855a;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 5px;
+}
+
+/* Details Button Hover */
+.card-footer .btn:hover {
+  background-color: #2f855a;
+  color: #fff;
+  border-color: #2f855a;
+  transition: 0.2s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .booking-card img {
+    height: 150px;
+  }
+  .booking-card {
+    max-width: 90%;
+  }
+}
+</style>
+
+<div class="full-page-container">
+  <h2 class="mb-4 text-center">My Bookings</h2>
+
+  <% if (bookings.length === 0) { %>
+    <div class="alert alert-light border shadow-sm text-center">
+      <p class="mb-0">
+        No bookings yet. <a href="/listings" class="alert-link">Explore listings</a>
+      </p>
+    </div>
+  <% } %>
+
+  <div class="row justify-content-center">
+    <% bookings.forEach((b) => { %>
+      <div class="col-md-6 col-lg-4 mb-4 d-flex justify-content-center">
+        <div class="card booking-card">
+          <img 
+            src="<%= b.listing && b.listing.image ? b.listing.image.url : '/location.png' %>" 
+            alt="<%= b.listing ? b.listing.title : 'Listing' %>" 
+            loading="lazy"
+          >
+          
+          <div class="card-body d-flex flex-column">
+
+            <!-- Title and Badge -->
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title">
+                <%= b.listing ? b.listing.title : 'Listing Unavailable' %>
+              </h5>
+              <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-2 py-1">
+                <%= b.status ? b.status : 'Confirmed' %>
+              </span>
+            </div>
+
+            <!-- Location -->
+            <div class="card-info">
+              <span class="info-label">Location</span>
+              <span class="info-value"><%= b.listing ? b.listing.location : 'N/A' %>, <%= b.listing ? b.listing.country : 'N/A' %></span>
+            </div>
+
+            <!-- Check-in / Check-out -->
+            <div class="card-info">
+              <div>
+                <span class="info-label">Check-In</span>
+                <span class="info-value"><%= b.checkIn ? new Date(b.checkIn).toLocaleDateString('en-GB') : "N/A" %></span>
+              </div>
+              <div>
+                <span class="info-label">Check-Out</span>
+                <span class="info-value"><%= b.checkOut ? new Date(b.checkOut).toLocaleDateString('en-GB') : "N/A" %></span>
+              </div>
+            </div>
+
+            <!-- Price & Details Button -->
+            <div class="card-footer">
+              <div class="price-box">
+                ₹ <%= b.totalPrice.toLocaleString("en-IN") %>
+              </div>
+              <a href="/booking/<%= b._id %>" class="btn btn-outline-dark btn-sm rounded-pill px-3">
+                Details
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>

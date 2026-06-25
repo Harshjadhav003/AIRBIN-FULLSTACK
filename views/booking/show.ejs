@@ -1,0 +1,173 @@
+<style>
+/* Center content vertically and horizontally */
+.full-page-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+/* Image Styling */
+.booking-detail-box img {
+  width: 100%;
+  height: 220px; /* Adjust height as needed */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  border-top-left-radius: 12px; /* Rounded corners on top */
+  border-top-right-radius: 12px;
+  display: block;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0.1); /* optional subtle effect */
+}
+
+/* Booking Detail Card */
+.booking-detail-box {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  background-color: #fff;
+  width: 100%;
+  max-width: 650px;
+  transition: transform 0.2s;
+}
+
+.booking-detail-box:hover {
+  transform: translateY(-3px);
+}
+
+/* Header Image Gradient */
+.text-shadow {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* Check-In / Check-Out boxes */
+.check-box {
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: #f1f3f5;
+  text-align: center;
+  border: 1px solid #dee2e6;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.check-box:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.check-box small {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.check-box p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #212529;
+}
+
+/* Payment Details */
+.payment-section h5 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.payment-section span {
+  font-size: 1.1rem;
+}
+
+/* Buttons */
+.btn-rounded {
+  border-radius: 50px;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+}
+
+.btn-danger:hover {
+  background-color: #c53030;
+  border-color: #c53030;
+  transition: 0.2s;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+  transition: 0.2s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .booking-detail-box {
+    max-width: 95%;
+  }
+  .check-box p {
+    font-size: 1rem;
+  }
+}
+</style>
+
+<div class="full-page-container">
+  <div class="booking-detail-box">
+
+    <!-- Header Image -->
+    <div class="position-relative">
+      <img 
+        src="<%= booking.listing && booking.listing.image ? booking.listing.image.url : '/location.png' %>" 
+        alt="Listing Image" 
+        class="w-100 object-fit-cover" 
+        style="height: 180px;"
+      >
+      <div class="position-absolute bottom-0 start-0 p-3 text-white w-100" style="background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);">
+        <h4 class="mb-0 text-shadow"><%= booking.listing ? booking.listing.title : 'Details' %></h4>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <!-- Status & ID -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2">
+          <i class="fa-solid fa-check-circle me-1"></i> Booked
+        </span>
+        <span class="text-muted small">ID: <%= booking._id %></span>
+      </div>
+
+      <!-- Check-In / Check-Out -->
+      <div class="row g-3 mb-4">
+        <div class="col-6">
+          <div class="check-box">
+            <small>Check-In</small>
+            <p><%= booking.checkIn ? new Date(booking.checkIn).toLocaleDateString('en-GB') : "N/A" %></p>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="check-box">
+            <small>Check-Out</small>
+            <p><%= booking.checkOut ? new Date(booking.checkOut).toLocaleDateString('en-GB') : "N/A" %></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Details -->
+      <div class="border-top pt-4 mb-4 payment-section">
+        <h5>Payment Details</h5>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="text-muted">Total amount paid</span>
+          <span class="fs-4 fw-bold text-dark">₹ <%= booking.totalPrice.toLocaleString("en-IN") %></span>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="d-grid gap-2">
+        <form method="POST" action="/booking/<%= booking._id %>?_method=DELETE" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+          <button class="btn btn-danger btn-rounded w-100">Cancel Booking</button>
+        </form>
+        <a href="/listings/<%= booking.listing._id %>" class="btn btn-outline-secondary btn-rounded w-100">
+          View Listing
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
