@@ -1,4 +1,4 @@
-#  AIRBIN
+#  AIRBNB
 
 ### Full-Stack Property Rental Platform Inspired by Airbnb
 
