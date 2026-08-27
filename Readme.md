@@ -1,14 +1,13 @@
-#  AIRBIN
+# 🏡 AIRBNB
 
 ### Full-Stack Property Rental Platform Inspired by Airbnb
 
-AIRBIN – Full Stack Airbnb Clone | Node.js, Express.js, MongoDB, Cloudinary, Google Maps
+AIRBNB – Full Stack Airbnb Clone | Node.js, Express.js, MongoDB, Cloudinary, Google Maps
 
 Developed a production-ready Airbnb-inspired property rental platform with secure authentication, property management, booking functionality, image uploads, and location visualization. Implemented RESTful APIs using MVC architecture, integrated Cloudinary for media storage, and deployed the application on Render. Built scalable backend services with MongoDB and Mongoose while ensuring responsive user experience and secure session management.
 
-
 <p align="center">
-  <img src="./public/screenshot/Airbnb.png" alt="AIRBIN Banner">
+  <img src="./public/screenshot/Airbnb.png" alt="AIRBNB Banner">
 </p>
 
 <p align="center">
@@ -21,7 +20,7 @@ Developed a production-ready Airbnb-inspired property rental platform with secur
 
 ---
 
-##  Live Application
+## 🚀 Live Application
 
 **Production URL**
 
@@ -33,9 +32,9 @@ https://github.com/Harshjadhav003/AIRBNB
 
 ---
 
-##  Project Summary
+## 📌 Project Summary
 
-The objective of AIRBIN is to replicate the core functionality of modern property rental platforms while implementing a maintainable and scalable backend architecture.
+The objective of AIRBNB is to replicate the core functionality of modern property rental platforms while implementing a maintainable and scalable backend architecture.
 
 The application supports:
 
@@ -49,7 +48,7 @@ The application supports:
 
 ---
 
-##  Business Problem
+## 🎯 Business Problem
 
 Property rental platforms require a reliable system for:
 
@@ -63,9 +62,9 @@ Developing these features while maintaining scalability, security, and performan
 
 ---
 
-##  Technical Solution
+## 💡 Technical Solution
 
-AIRBIN addresses these challenges through:
+AIRBNB addresses these challenges through:
 
 * MVC-based backend architecture
 * MongoDB document modeling with Mongoose
@@ -133,7 +132,7 @@ The application follows separation of concerns principles to improve maintainabi
 
 ---
 
-##  Key Engineering Highlights
+## 📈 Key Engineering Highlights
 
 * Designed scalable MVC architecture for maintainable development.
 * Implemented secure authentication using Passport.js and Express Sessions.
@@ -144,7 +143,7 @@ The application follows separation of concerns principles to improve maintainabi
 
 ---
 
-##  About the Developer
+## 👨‍💻 About the Developer
 
 **Harsh Jadhav**
 
