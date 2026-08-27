@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # 🏡 AIRBNB
+=======
+#  AIRBNB
+>>>>>>> fb0fbe992eac4ba9ff673a96aa1426b8c7d786d7
 
 ### Full-Stack Property Rental Platform Inspired by Airbnb
 
