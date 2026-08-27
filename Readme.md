@@ -29,7 +29,7 @@ https://airbin-fullstack-1-32hl.onrender.com/listings
 
 **Source Code**
 
-https://github.com/Harshjadhav003/AIRBIN-FULLSTACK
+https://github.com/Harshjadhav003/AIRBNB
 
 ---
 
