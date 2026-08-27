@@ -1,4 +1,4 @@
-# 🏡 AIRBIN
+#  AIRBIN
 
 ### Full-Stack Property Rental Platform Inspired by Airbnb
 
@@ -21,7 +21,7 @@ Developed a production-ready Airbnb-inspired property rental platform with secur
 
 ---
 
-## 🚀 Live Application
+##  Live Application
 
 **Production URL**
 
@@ -33,7 +33,7 @@ https://github.com/Harshjadhav003/AIRBNB
 
 ---
 
-## 📌 Project Summary
+##  Project Summary
 
 The objective of AIRBIN is to replicate the core functionality of modern property rental platforms while implementing a maintainable and scalable backend architecture.
 
@@ -49,7 +49,7 @@ The application supports:
 
 ---
 
-## 🎯 Business Problem
+##  Business Problem
 
 Property rental platforms require a reliable system for:
 
@@ -63,7 +63,7 @@ Developing these features while maintaining scalability, security, and performan
 
 ---
 
-## 💡 Technical Solution
+##  Technical Solution
 
 AIRBIN addresses these challenges through:
 
@@ -133,7 +133,7 @@ The application follows separation of concerns principles to improve maintainabi
 
 ---
 
-## 📈 Key Engineering Highlights
+##  Key Engineering Highlights
 
 * Designed scalable MVC architecture for maintainable development.
 * Implemented secure authentication using Passport.js and Express Sessions.
@@ -144,7 +144,7 @@ The application follows separation of concerns principles to improve maintainabi
 
 ---
 
-## 👨‍💻 About the Developer
+##  About the Developer
 
 **Harsh Jadhav**
 
